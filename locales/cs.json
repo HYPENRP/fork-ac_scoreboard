@@ -7,5 +7,5 @@
     "anonymous_player": "Anonymní hráč"
   },
   "command_open": "Otevře rozhraní scoreboardu",
-  "keymap_open": "Otevřít scoreboard"
+  "keymap_open": "<font face='Inter'>Otevřít scoreboard</font>"
 }
