@@ -14,7 +14,7 @@
       {#each $data.groups as group (group)}
         <div
           class={cn(
-            'flex items-center justify-between gap-2 rounded-md bg-slate-700 px-2',
+            'flex items-center justify-between gap-2 rounded-md bg-hypen-gray-200 px-2',
             $config.compactGroups ? 'py-1' : 'py-2'
           )}
         >
@@ -27,7 +27,7 @@
           {#if group.count !== undefined}
             <span
               class={cn(
-                'min-w-9 flex-shrink-0 select-none rounded-md bg-slate-800 px-2 text-center',
+                'min-w-9 flex-shrink-0 select-none rounded-md bg-hypen-gray-300 px-2 text-center',
                 $config.highlightEmptyGroups && group.count === 0 && ' text-red-400'
               )}>{group.count}</span
             >

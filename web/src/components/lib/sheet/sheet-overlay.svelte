@@ -16,6 +16,6 @@
 <SheetPrimitive.Overlay
   {transition}
   {transitionConfig}
-  class={cn('fixed inset-0 z-50 bg-slate-900/50', className)}
+  class={cn('fixed inset-0 z-50 bg-hypen-gray-400/50', className)}
   {...$$restProps}
 />
