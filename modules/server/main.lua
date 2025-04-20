@@ -1,20 +1,17 @@
 local Config = require 'config'
 local Utils = require 'modules.server.utils'
+local VisibleSections = Config.visibleSections
 
-lib.versionCheck('acscripts/ac_scoreboard')
-
-
-local visibleSections = Config.visibleSections
 local Players = nil
 local Groups = nil
 local Indicators = nil
 
 SetTimeout(0, function()
-    if visibleSections.players then
+    if VisibleSections.players then
         Players = require 'modules.server.sections.players'
     end
 
-    if visibleSections.groups then
+    if VisibleSections.groups then
         local framework = Utils.getFramework()
 
         if framework then
@@ -24,17 +21,24 @@ SetTimeout(0, function()
         end
     end
 
-    if visibleSections.statusIndicators then
+    if VisibleSections.statusIndicators then
         Indicators = require 'modules.server.sections.indicators'
     end
 end)
+
+
+local sv_maxclients = GetConvarInt('sv_maxclients', 0)
+AddConvarChangeListener('sv_maxclients', function()
+    sv_maxclients = GetConvarInt('sv_maxclients', 0)
+end)
+
 
 
 ---@param playerId number
 ---@param section string
 ---@return boolean
 local function canShowSection(playerId, section)
-    local state = visibleSections[section]
+    local state = VisibleSections[section]
     return state == true or state == 'limited' and IsPlayerAceAllowed(tostring(playerId), ('scoreboard.show.%s'):format(section))
 end
 
@@ -58,7 +62,7 @@ lib.callback.register('ac_scoreboard:getServerData', function(playerId)
 
     if canShowSection(playerId, 'footer') then
         payload.footer = {
-            maxPlayers = GetConvarInt('sv_maxclients', 0), -- still waiting for the day when we can subscribe to convar changes
+            maxPlayers = sv_maxclients,
             playerCount = GetNumPlayerIndices(),
         }
     end
